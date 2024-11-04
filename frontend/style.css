@@ -1,0 +1,97 @@
+body {
+    background-color: #42269e;
+    font-family: Arial, sans-serif; /* Font yang lebih modern */
+}
+
+.container {
+    background-color: #ffffff; /* Latar belakang putih untuk konten */
+    border-radius: 8px; /* Sudut yang membulat */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan halus untuk kedalaman */
+    padding: 20px; /* Ruang di dalam kontainer */
+}
+
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    color: #5921dc; /* Warna judul biru keunguan */
+}
+
+.task-form {
+    margin-bottom: 20px; /* Spasi bawah untuk form */
+}
+
+input, 
+textarea {
+    border: 1px solid #6f42c1; /* Border berwarna biru keunguan */
+}
+
+input:focus, 
+textarea:focus {
+    border-color: #5a32a3; /* Warna border saat fokus */
+    box-shadow: 0 0 5px rgba(111, 66, 193, 0.5); /* Efek bayangan saat fokus */
+}
+
+.btn-primary {
+    background-color: #42269e; /* Warna tombol utama */
+    border-color: #6f42c1; /* Border tombol utama */
+}
+
+.btn-primary:hover {
+    background-color: #29146e; /* Warna tombol saat hover */
+    border-color: #5a32a3; /* Warna tombol saat hover */
+}
+
+.list-group-item {
+    border: none; /* Menghilangkan border default pada item */
+    background-color: #f1f3f5; /* Latar belakang item tugas */
+    border-radius: 5px; /* Sudut yang membulat pada item */
+    margin-bottom: 5px; /* Jarak antar tasks */
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef; /* Warna latar belakang saat hover */
+}
+
+/* Styling untuk Pop-Up */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Latar belakang transparan untuk pop-up */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #ffffff; /* Latar belakang putih untuk konten pop-up */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h2 {
+    color: #6f42c1; /* Warna judul di pop-up */
+}
+
+.popup-content button {
+    margin-top: 10px; /* Spasi atas untuk tombol di pop-up */
+}
+
+.popup-content .btn-danger {
+    background-color: #dc3545; /* Warna merah untuk tombol hapus */
+    color: white; /* Teks putih */
+}
+
+.popup-content .btn-cancel {
+    background-color: white; /* Warna putih untuk tombol cancel */
+    color: #42269e; /* Warna teks biru keunguan */
+    border: 1px solid #42269e; /* Garis border warna biru keunguan */
+}
+
+.text-decoration-line-through {
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.6); /* Warna teks yang dicoret */
+}
