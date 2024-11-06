@@ -32,8 +32,17 @@ class TaskController extends Controller
         return $task;
     }
 
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
+        // Cari Task berdasarkan ID
+        $task = Task::find($id);
+
+        // Jika Task tidak ditemukan, kirim respons error
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
+
+        // Validasi data
         $request->validate([
             'title' => 'string|max:255',
             'description' => 'nullable|string',
@@ -41,6 +50,7 @@ class TaskController extends Controller
             'completed' => 'boolean',
         ]);
 
+        // Update data task
         $task->update($request->all());
 
         return response()->json($task);
@@ -50,6 +60,6 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return response()->json(['message' => 'Task deleted successfully']);
+        return response()->json(['message' => 'Berhasil menghapus kegiatan']);
     }
 }

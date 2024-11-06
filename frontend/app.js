@@ -5,15 +5,23 @@ function taskApp() {
         isPopupOpen: false,
         selectedTask: {},
         isEditMode: false,
-        isConfirmPopupOpen: false, // Status pop-up konfirmasi diatur ke false saat inisialisasi
+        isConfirmPopupOpen: false,
+        hasFetched: false, // Tambahkan variabel untuk mengecek apakah fetch sudah dilakukan
 
         async fetchTasks() {
-            const response = await fetch('http://127.0.0.1:8000/api/tasks');
-            this.tasks = await response.json();
+            if (!this.hasFetched) { // Hanya fetch jika belum dilakukan
+                this.hasFetched = true; // Tandai bahwa fetch sudah dilakukan
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/api/tasks');
+                    this.tasks = await response.json();
+                } catch (error) {
+                    console.error('Error fetching tasks:', error);
+                }
+            }
         },
 
         init() {
-            this.fetchTasks(); // Memanggil fetchTasks saat inisialisasi
+            this.fetchTasks(); // Panggil fetchTasks di awal inisialisasi
         },
 
         async addTask() {
@@ -35,8 +43,8 @@ function taskApp() {
 
                 if (response.ok) {
                     const createdTask = await response.json();
-                    this.tasks.push(createdTask); // Menambahkan task yang baru dibuat ke daftar
-                    this.newTask = { title: '', description: '', priority: 'Low' }; // Reset form
+                    this.tasks.push(createdTask);
+                    this.newTask = { title: '', description: '', priority: 'Low' };
                 } else {
                     console.error('Error adding task:', response.statusText);
                 }
@@ -49,7 +57,7 @@ function taskApp() {
             const task = this.tasks.find(t => t.id === id);
             if (task) {
                 task.completed = !task.completed;
-                await this.saveTasks(); // Pastikan untuk menyimpan status penyelesaian
+                await this.saveTasks();
             }
         },
 
@@ -108,7 +116,7 @@ function taskApp() {
 
         confirmDelete(task) {
             this.selectedTask = task;
-            this.isConfirmPopupOpen = true; // Hanya membuka pop-up jika pengguna memilih untuk menghapus
+            this.isConfirmPopupOpen = true;
         },
 
         async deleteTask(id) {
@@ -119,7 +127,7 @@ function taskApp() {
 
                 if (response.ok) {
                     this.tasks = this.tasks.filter(task => task.id !== id);
-                    this.isConfirmPopupOpen = false; // Menutup pop-up konfirmasi setelah penghapusan
+                    this.isConfirmPopupOpen = false;
                 } else {
                     console.error('Error deleting task:', response.statusText);
                 }
